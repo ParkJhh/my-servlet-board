@@ -101,6 +101,7 @@
 <body>
 <header>
     <a class="logo" href="/view/board/list.jsp"><img src="https://poiemaweb.com/img/logo.png"></a>
+
     <nav>
         <ul class="nav-items">
             <li><a href="/board/list">게시글목록</a></li>

@@ -33,15 +33,14 @@ public class BoardController extends HttpServlet {
             view += "list.jsp";
         } else if (command.equals("/board/createForm")) {
 
-            resp.sendRedirect("/view/board/createForm.html");
-
+            view += "createForm.jsp";
         } else if (command.equals("/board/create")) {
 
             resp.sendRedirect("/view/member/registration.html");
 
         } else if (command.equals("/board/updateForm")) {
 
-            resp.sendRedirect("/view/board/updateForm.html");
+            view += "updateForm.jsp";
 
         } else if (command.equals("/board/update")) {
             //게시판 번호에 맞는 글 수정
@@ -54,5 +53,7 @@ public class BoardController extends HttpServlet {
         //페이지 응답하는 방법
             //리다이렉트 >> 클라이언트에게 새로운 URL을 응답
             //포워드
+        RequestDispatcher dispatcher = req.getRequestDispatcher(view);
+        dispatcher.forward(req, resp);
     }
 }
