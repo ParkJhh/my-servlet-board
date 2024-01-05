@@ -10,6 +10,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf3b7daf-e42b-4612-a957-c3c9579b0ec9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardMemoryDao.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/data/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/service/BoardService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/createForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/board/createForm.jsp" afterDir="false" />
@@ -27,6 +31,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -62,6 +67,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -171,7 +177,7 @@
       <workItem from="1704353795074" duration="1423000" />
       <workItem from="1704368776412" duration="9000" />
       <workItem from="1704371477678" duration="19000" />
-      <workItem from="1704413776723" duration="10346000" />
+      <workItem from="1704413776723" duration="20332000" />
     </task>
     <servers />
   </component>
