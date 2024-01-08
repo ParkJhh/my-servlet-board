@@ -104,7 +104,6 @@
           <tr>
             <th scope="col">번호</th>
             <th scope="col">제목</th>
-            <th scope="col">내용</th>
             <th scope="col">작성자</th>
             <th scope="col">작성일자</th>
             <th scope="col">조회수</th>
@@ -117,8 +116,7 @@
 
           <tr>
             <th scope="row"><%= boards.get(i).getId() %></th>
-            <td><%= boards.get(i).getTitle() %></td>
-            <td><%= boards.get(i).getContent() %></td>
+            <td><a href="/board/detail?id=<%= boards.get(i).getId() %>"><%= boards.get(i).getTitle() %></a></td>
             <td><%= boards.get(i).getWriter() %></td>
             <td><%= boards.get(i).getCreatedAt().format(DateTimeFormatter.ofPattern("YYYY-MM-DD:HH")) %></td>
             <td><%= boards.get(i).getViewCount() %></td>

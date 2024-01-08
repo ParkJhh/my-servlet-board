@@ -10,18 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="bf3b7daf-e42b-4612-a957-c3c9579b0ec9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardMemoryDao.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/data/Board.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/service/BoardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/webapp/view/board/detail.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/createForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/board/createForm.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/service/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/createForm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/list.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/board/list.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/updateForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/board/updateForm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/member/join.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/member/join.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/member/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/member/login.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/member/registration.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/member/registration.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/updateForm.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/member/join.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/member/login.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/member/registration.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +32,7 @@
       <list>
         <option value="Interface" />
         <option value="Class" />
+        <option value="Jsp File" />
       </list>
     </option>
   </component>
@@ -54,23 +54,23 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "feature/#2-response-to-client",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/mvc&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.keymap&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\kitri\Documents\my-servlet-board\src\main\webapp\view\board" />
@@ -177,7 +177,14 @@
       <workItem from="1704353795074" duration="1423000" />
       <workItem from="1704368776412" duration="9000" />
       <workItem from="1704371477678" duration="19000" />
-      <workItem from="1704413776723" duration="20332000" />
+      <workItem from="1704413776723" duration="20791000" />
+      <workItem from="1704603634522" duration="3310000" />
+      <workItem from="1704606949886" duration="319000" />
+      <workItem from="1704607449519" duration="34000" />
+      <workItem from="1704608105305" duration="4093000" />
+      <workItem from="1704625202028" duration="1482000" />
+      <workItem from="1704626798488" duration="61000" />
+      <workItem from="1704671454472" duration="7194000" />
     </task>
     <servers />
   </component>

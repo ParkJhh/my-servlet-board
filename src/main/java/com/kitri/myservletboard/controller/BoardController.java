@@ -59,6 +59,12 @@ public class BoardController extends HttpServlet {
         } else if (command.equals("/board/delete")) {
             //게시판 번호에 맞는 글 삭제
             resp.sendRedirect("/view/member/login.html");
+        } else if (command.contains("/board/detail")) {
+            Long id = Long.parseLong(req.getParameter("id"));
+            Board board = boardService.getBoard(id);
+
+            req.setAttribute("board",board);
+            view += "detail.jsp";
         }
 
         //페이지 응답하는 방법

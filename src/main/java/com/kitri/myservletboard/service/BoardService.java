@@ -17,12 +17,16 @@ public class BoardService {
     public static BoardService getInstance(){
         return instance;
     }
+    //게시글 하나 보여주기
+    public Board getBoard(Long id) {
+       return boardDao.getById(id);
+    }
     //게시판 리스트 가져오기
     public ArrayList<Board> getBoards() {
         return boardDao.getAll();
     }
     public void addBoard(Board board){
-       boardDao.save(board);
+        boardDao.save(board);
     }
     public void updateBoard(Board board){
         boardDao.update(board);
