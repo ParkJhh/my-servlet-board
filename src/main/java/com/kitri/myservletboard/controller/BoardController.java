@@ -61,15 +61,33 @@ public class BoardController extends HttpServlet {
             return;
 
         } else if (command.equals("/board/updateForm")) {
+            //게시글 수정
+            Long id = Long.parseLong(req.getParameter("id"));
+            Board board = boardService.getBoard(id);
 
+            req.setAttribute("board",board);
             view += "updateForm.jsp";
 
         } else if (command.equals("/board/update")) {
             //게시판 번호에 맞는 글 수정
-            resp.sendRedirect("/view/member/join.html");
+            Long id = Long.parseLong(req.getParameter("id"));
+            String title = req.getParameter("title");
+            String content = req.getParameter("content");
+
+            Board board = new Board(id, title, content, null, LocalDateTime.now(), 0,0);
+            boardService.updateBoard(board);
+
+            resp.sendRedirect("/board/list");
+            return;
+
         } else if (command.equals("/board/delete")) {
-            //게시판 번호에 맞는 글 삭제
-            resp.sendRedirect("/view/member/login.html");
+            Long id = Long.parseLong(req.getParameter("id"));
+            Board board = new Board(id, null, null, null, null, 0,0);
+
+            boardService.deleteBoard(board);
+            resp.sendRedirect("/board/list");
+            return;
+
         } else if (command.contains("/board/detail")) {
             Long id = Long.parseLong(req.getParameter("id"));
             Board board = boardService.getBoard(id);
@@ -80,7 +98,7 @@ public class BoardController extends HttpServlet {
 
         //페이지 응답하는 방법
             //리다이렉트 >> 클라이언트에게 새로운 URL을 응답
-            //포워드
+            //포워드 >> 요청에 따른 처리결과를 담아 응답
         RequestDispatcher dispatcher = req.getRequestDispatcher(view);
         dispatcher.forward(req, resp);
     }

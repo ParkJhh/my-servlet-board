@@ -13,8 +13,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardMemoryDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardMemoryDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/createForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/board/createForm.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/board/list.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/updateForm.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/board/updateForm.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -178,7 +177,7 @@
       <workItem from="1704608105305" duration="4093000" />
       <workItem from="1704625202028" duration="1482000" />
       <workItem from="1704626798488" duration="61000" />
-      <workItem from="1704671454472" duration="15486000" />
+      <workItem from="1704671454472" duration="24290000" />
     </task>
     <servers />
   </component>
