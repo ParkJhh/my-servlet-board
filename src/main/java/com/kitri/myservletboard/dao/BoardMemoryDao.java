@@ -39,7 +39,28 @@ public class BoardMemoryDao implements BoardDao{
 
     @Override
     public void save(Board board) {
-        memoryBoardDB.add(board);
+            //수업중 강사님 코드
+            // id 자동생성 로직 (단, id가 기존의 id와 중복되지 않도록)
+//            int id = 0;
+//            boolean flag =false;
+//            while (true) {
+//                id++;
+//                for (Board board_ : memoryBoardDB) {
+//                    if(id==board_.getId()){
+//                      flag = false;
+//                        break;
+//                    }
+//                }
+//            }
+//            flag = true;
+        //내가 짠거
+            for(int j =0; j < memoryBoardDB.size(); j++){
+                if(memoryBoardDB.get(j).getId() == j){
+                } else {
+                    board.setId((long)j+2);
+                }
+            }
+            memoryBoardDB.add(board);
     }
 
     @Override
