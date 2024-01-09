@@ -1,6 +1,7 @@
 package com.kitri.myservletboard.service;
 
 import com.kitri.myservletboard.dao.BoardDao;
+import com.kitri.myservletboard.dao.BoardJdbcDao;
 import com.kitri.myservletboard.dao.BoardMemoryDao;
 import com.kitri.myservletboard.data.Board;
 
@@ -8,7 +9,8 @@ import java.util.ArrayList;
 
 public class BoardService {
 
-    BoardDao boardDao = BoardMemoryDao.getInstance();
+//    BoardDao boardDao = BoardMemoryDao.getInstance();
+    BoardDao boardDao = BoardJdbcDao.getInstance();
 
     //싱글톤으로 하나만 생성
     private BoardService(){};
