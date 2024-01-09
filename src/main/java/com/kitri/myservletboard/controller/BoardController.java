@@ -17,12 +17,12 @@ public class BoardController extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
+        req.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
         out.println("<h1>요청 테스트</h1>");
 
         //URL을 파싱해서 어떤 요청인지 파악
         out.println(req.getRequestURI());
-        req.setCharacterEncoding("UTF-8");
         String reqURI = req.getRequestURI(); //   /board/list
         String contextPath = req.getContextPath();
         String command = reqURI.substring(contextPath.length());
@@ -30,17 +30,12 @@ public class BoardController extends HttpServlet {
 
         if (command.equals("/board/list")) {
             //게시글 리스트 조회
-            //게시판 페이지 응답
-//            resp.sendRedirect("/view/board/list.html");
-            //jsp에게 동적으로 넘겨주어야 한다.
             ArrayList<Board> boards = boardService.getBoards();
             req.setAttribute("boards",boards);
             view += "list.jsp";
-
         } else if (command.equals("/board/createForm")) {
             view += "createForm.jsp";
         } else if (command.equals("/board/create")) {
-            //데이터를 읽으니 문자 깨짐이 발생
             //데이터 읽고 저장
             String title = req.getParameter("title");
             String content = req.getParameter("content");
@@ -60,7 +55,6 @@ public class BoardController extends HttpServlet {
 
         } else if (command.equals("/board/update")) {
             //게시판 번호에 맞는 글 수정
-            resp.sendRedirect("/view/member/join.html");
             Long id = Long.parseLong(req.getParameter("id"));
             String title = req.getParameter("title");
             String content = req.getParameter("content");
@@ -73,7 +67,6 @@ public class BoardController extends HttpServlet {
 
         } else if (command.equals("/board/delete")) {
             //게시판 번호에 맞는 글 삭제
-            resp.sendRedirect("/view/member/login.html");
             Long id = Long.parseLong(req.getParameter("id"));
             Board board = new Board(id, null, null, null, null, 0,0);
 
