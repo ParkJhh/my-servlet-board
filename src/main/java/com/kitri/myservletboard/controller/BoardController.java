@@ -1,5 +1,6 @@
 package com.kitri.myservletboard.controller;
 import com.kitri.myservletboard.data.Board;
+import com.kitri.myservletboard.data.Pagination;
 import com.kitri.myservletboard.service.BoardService;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,10 +30,17 @@ public class BoardController extends HttpServlet {
         String view = "/view/board/";
 
         if (command.equals("/board/list")) {
-            //게시글 리스트 조회
-            ArrayList<Board> boards = boardService.getBoards();
+            String page = req.getParameter("page");
+            // 첫 접속시? 아무것도 없을 경우 강제로 1페이지 부여
+            if(page == null) page ="1";
+            Pagination pagination = new Pagination(Integer.parseInt(page));
+
+            ArrayList<Board> boards = boardService.getBoards(pagination);
+
+            req.setAttribute("pagination",pagination);
             req.setAttribute("boards",boards);
             view += "list.jsp";
+
         } else if (command.equals("/board/createForm")) {
             view += "createForm.jsp";
         } else if (command.equals("/board/create")) {
