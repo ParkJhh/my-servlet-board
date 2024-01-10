@@ -1,5 +1,6 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="com.kitri.myservletboard.data.Board" %>
+<%@ page import="com.kitri.myservletboard.data.Pagination" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
@@ -31,7 +32,6 @@
         <tbody class="table-group-divider">
           <% ArrayList<Board> boards = (ArrayList<Board>) request.getAttribute("boards");
             for (int i = 0; i < boards.size(); i++) { %>
-
           <tr>
             <th scope="row"><%= boards.get(i).getId() %></th>
             <td><a href="/board/detail?id=<%= boards.get(i).getId() %>"><%= boards.get(i).getTitle() %></a></td>
@@ -43,7 +43,7 @@
           <%
             }
           %>
-
+          <input type="text" name="currentPage" value="1" hidden>
         </tbody>
       </table>
       <div>
@@ -52,15 +52,40 @@
       <div class="d-flex justify-content-center">
       <nav aria-label="Page navigation example">
         <ul class="pagination pagination-sm">
+          <%
+            Pagination pagination = (Pagination) request.getAttribute("pagination");
+            if(pagination.isHasPrev()){
+          %>
+          <li class="page-item">
+            <a class="page-link" href="/board/list?page=<%=pagination.getStartPageOnScreen() - 1%>" tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+          <%} else {%>
           <li class="page-item disabled">
             <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
           </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <%}%>
+
+          <% for(int i = pagination.getStartPageOnScreen(); i <= pagination.getEndPageOnScreen(); i++){
+             if(pagination.getPage() == i) {
+          %>
+            <li class="page-item"><a class="page-link active" href="/board/list?page=<%=i%>"><%=i%></a></li>
+          <%} else {%>
+            <li class="page-item"><a class="page-link" href="/board/list?page=<%=i%>"><%=i%></a></li>
+          <%}}%>
+
+          <%
+            if(pagination.isHasNext()){
+          %>
           <li class="page-item">
+            <a class="page-link" href="/board/list?page=<%=pagination.getEndPageOnScreen() +1%>">Next</a>
+          </li>
+          <%} else {%>
+          <li class="page-item disabled">
             <a class="page-link" href="#">Next</a>
           </li>
+          <%}%>
+
+
         </ul>
       </nav>
     </div>

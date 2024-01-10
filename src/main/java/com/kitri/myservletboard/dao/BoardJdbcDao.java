@@ -1,8 +1,8 @@
 package com.kitri.myservletboard.dao;
 
 import com.kitri.myservletboard.data.Board;
+import com.kitri.myservletboard.data.Pagination;
 
-import javax.swing.text.TableView;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -46,6 +46,47 @@ public class BoardJdbcDao implements BoardDao{
             String sql = "SELECT * FROM board";
             ps = connection.prepareStatement(sql);
             rs = ps.executeQuery(sql);
+
+            while(rs.next()){
+                Long id = rs.getLong("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String writer = rs.getString("writer");
+                LocalDateTime createAt = rs.getTimestamp("created_at").toLocalDateTime();
+                int viewCount = rs.getInt("view_count");
+                int commentCount = rs.getInt("view_count");
+
+                boards.add(new Board(id,title,content,writer,createAt,viewCount,commentCount));
+            }
+        } catch(Exception e) {
+
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return boards;
+    }
+
+    @Override
+    public ArrayList<Board> getAll(Pagination pagination) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Board> boards = new ArrayList<>();
+
+        try{
+            connection = connectDB();
+            String sql = "SELECT * FROM board LIMIT ?,?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1,(pagination.getPage() -1) * pagination.getMaxRecordsPerPage());
+            ps.setInt(2,pagination.getMaxRecordsPerPage());
+            rs = ps.executeQuery();
 
             while(rs.next()){
                 Long id = rs.getLong("id");
@@ -186,5 +227,33 @@ public class BoardJdbcDao implements BoardDao{
                 e.printStackTrace();
             }
         }
+    }
+    public int count(){
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        int count = 0;
+        try{
+            connection = connectDB();
+            String sql = "SELECT count(*) FROM board";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+            //전체 카운트 조회의 커서 위치
+            rs.next();
+            //전체 카운트 값 담기
+            count = rs.getInt("count(*)");
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return count;
     }
 }
