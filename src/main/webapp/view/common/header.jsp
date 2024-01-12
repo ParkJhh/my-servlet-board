@@ -20,17 +20,35 @@
     <title>Common Header</title>
 </head>
 <body>
-    <header>
-        <a class="logo" href="/view/board/list.jsp"><span class="material-symbols-outlined">
+    <header class="">
+        <a class="logo" href="/board/list"><span class="material-symbols-outlined">
 run_circle
 </span></a>
         <nav>
-            <ul class="nav-items">
-                <li><a href="/board/list">게시글목록</a></li>
-                <li><a href="/view/member/join.jsp">회원가입</a></li>
-                <li><a href="/view/member/registration.jsp">회원정보수정</a></li>
-                <li><a href="/view/member/login.jsp">로그인</a></li>
-            </ul>
+        <div class="d-flex justify-content-center">
+            <div class="p-2"><a href="/board/list">게시글 목록</a></div>
+            <div class="p-2"><a href="/view/member/join.jsp">회원 가입</a></div>
+            <div class="p-2"><a href="/view/member/registration.jsp">회원정보 수정</a></div>
+            <div class="p-2"><a href="/view/member/login.jsp">로그인</a></div>
+            <div class="p-2">
+                <form role="search" action="/board/list">
+                    <select name="period" >
+                        <option value = "" selected ${param.period == "" ? "selected" : ""}>전체기간</option>
+                        <option value ="1" ${param.period == "1" ? "selected" : ""}>1일전</option>
+                        <option value ="7" ${param.period == "7" ? "selected" : ""}>1주일전</option>
+                        <option value ="30" ${param.period == "30" ? "selected" : ""}>1개월전</option>
+                        <option value ="180" ${param.period == "180" ? "selected" : ""}>6개월전</option>
+                    </select>
+                    <select name="value">
+                        <option value="title" ${param.value == "title" ? "selected" : ""}>제목</option>
+                        <option value="writer" ${param.value == "writer" ? "selected" : ""}>작성자</option>
+                    </select>
+                    &nbsp;
+                    <input name="search" type="search" value="${param.search}">
+                    <button class="btn btn-outline-dark" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
         </nav>
     </header>
 </body>

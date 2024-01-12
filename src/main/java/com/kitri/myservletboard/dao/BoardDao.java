@@ -8,6 +8,10 @@ import java.util.ArrayList;
 public interface BoardDao {
     public ArrayList<Board> getAll();
 
+    public ArrayList<Board> getAll(String value, String search, String period, Pagination pagination);
+
+    public ArrayList<Board> getAll(String value, String search, Pagination pagination);
+
     public ArrayList<Board> getAll(Pagination pagination);
     public Board getById(Long id);
 

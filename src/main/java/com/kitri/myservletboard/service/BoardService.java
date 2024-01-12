@@ -27,12 +27,26 @@ public class BoardService {
     public ArrayList<Board> getBoards() {
         return boardDao.getAll();
     }
+    public ArrayList<Board> getBoards(String value, String search, String period, Pagination pagination) {
+        pagination.setTotalRecords(((BoardJdbcDao)boardDao).countsearch(value, search, period)); //테이블 전체 레코드 수
+        pagination.calcPagination();
+
+        return boardDao.getAll(value,search,period,pagination);
+    }
+    public ArrayList<Board> getBoards(String value, String search, Pagination pagination) {
+        pagination.setTotalRecords(((BoardJdbcDao)boardDao).countsearch(value, search)); //테이블 전체 레코드 수
+        pagination.calcPagination();
+
+        return boardDao.getAll(value,search,pagination);
+    }
     public ArrayList<Board> getBoards(Pagination pagination) {
         pagination.setTotalRecords(((BoardJdbcDao)boardDao).count()); //테이블 전체 레코드 수
         pagination.calcPagination();
 
         return boardDao.getAll(pagination);
     }
+
+
     public void addBoard(Board board){
         boardDao.save(board);
     }

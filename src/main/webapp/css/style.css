@@ -39,28 +39,20 @@ header {
 
 nav {
     float: right;
-}
-
-.nav-items {
-    margin-right: 20px;
+    font-weight: bold;
     text-decoration: none;
+    margin-right: 20px;
 }
-
-.nav-items>li {
+nav > a {
     display: inline-block;
-    /* 가로정렬 */
-}
-
-.nav-items>li>a {
-    /* for Vertical Centering */
     line-height: 60px;
     padding: 0 30px;
     color: rgba(0, 0, 0, 0.4);
 }
-
-.nav-items>li>a:hover {
+nav > a:hover {
     color: rgba(0, 0, 0, 0.8);
 }
+
 /* join */
 .input-form {
     max-width: 680px;

@@ -30,15 +30,30 @@ public class BoardController extends HttpServlet {
         String view = "/view/board/";
 
         if (command.equals("/board/list")) {
+            //페이지 관련 세팅
             String page = req.getParameter("page");
-            // 첫 접속시? 아무것도 없을 경우 강제로 1페이지 부여
-            if(page == null) page ="1";
+            //검색 값
+            String value = req.getParameter("value");
+            String search = req.getParameter("search");
+            //검색 기간조화
+            String period = req.getParameter("period");
+
+            if (page == null) page = "1";
             Pagination pagination = new Pagination(Integer.parseInt(page));
-
-            ArrayList<Board> boards = boardService.getBoards(pagination);
-
+            if (period == null) {
+                ArrayList<Board> boards = boardService.getBoards(value, search, pagination);
+                req.setAttribute("boards", boards);
+            } else if (period.equals("")) {
+                ArrayList<Board> boards = boardService.getBoards(value, search, pagination);
+                req.setAttribute("boards", boards);
+            } else {
+                ArrayList<Board> boards = boardService.getBoards(value,search,period,pagination);
+                req.setAttribute("boards", boards);
+            }
             req.setAttribute("pagination",pagination);
-            req.setAttribute("boards",boards);
+            req.setAttribute("value",value);
+            req.setAttribute("search",search);
+            req.setAttribute("period",period);
             view += "list.jsp";
 
         } else if (command.equals("/board/createForm")) {
@@ -87,6 +102,7 @@ public class BoardController extends HttpServlet {
             Board board = boardService.getBoard(id);
             req.setAttribute("board",board);
             view += "detail.jsp";
+
         }
 
         //페이지 응답하는 방법

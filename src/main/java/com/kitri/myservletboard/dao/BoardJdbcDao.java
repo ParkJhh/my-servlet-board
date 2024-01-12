@@ -4,6 +4,7 @@ import com.kitri.myservletboard.data.Board;
 import com.kitri.myservletboard.data.Pagination;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -71,6 +72,54 @@ public class BoardJdbcDao implements BoardDao{
         }
         return boards;
     }
+    @Override
+    public ArrayList<Board> getAll(String value, String search, Pagination pagination) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Board> boards = new ArrayList<>();
+        //setString시, '' 이 자동으로 붙음. 또한 where절에 컬럼명은 바인딩 안됨
+        if (value == null){
+            value="title";
+        }
+        if (search == null) {
+            search="";
+        }
+        try {
+            connection = connectDB();
+            String sql = "SELECT * FROM board WHERE "+ value +" LIKE "+ "'%" + search +"%'"+" LIMIT ?,?"; // LIMIT 0,10 첫번째 페이지/LIMIT 10,10 두번째 페이지/LIMIT 20,10 세번째페이지
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, (pagination.getPage() - 1) * pagination.getMaxRecordsPerPage()); // 페이지-1 곱하기 10해야 첫번째 0,10,20 ... 숫자나옴
+            ps.setInt(2, pagination.getMaxRecordsPerPage());
+            rs = ps.executeQuery();
+
+            while(rs.next()){
+                Long id = rs.getLong("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String writer = rs.getString("writer");
+                LocalDateTime createAt = rs.getTimestamp("created_at").toLocalDateTime();
+                int viewCount = rs.getInt("view_count");
+                int commentCount = rs.getInt("view_count");
+
+                boards.add(new Board(id,title,content,writer,createAt,viewCount,commentCount));
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return boards;
+    }
+
 
     @Override
     public ArrayList<Board> getAll(Pagination pagination) {
@@ -256,4 +305,132 @@ public class BoardJdbcDao implements BoardDao{
         }
         return count;
     }
+
+    @Override
+    public ArrayList<Board> getAll(String value, String search, String period, Pagination pagination) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Board> boards = new ArrayList<>();
+        //setString시, '' 이 자동으로 붙음. 또한 where절에 컬럼명은 바인딩 안됨
+        if (value == null){
+            value="title";
+        }
+        if (search == null) {
+            search="";
+        }
+        try {
+            connection = connectDB();
+            String sql = "SELECT * FROM board WHERE "+ value +" LIKE "+ "'%" + search +"%'" + " AND created_at BETWEEN date_sub(now(), interval " + period + " day) and now() " + " LIMIT ?,?"; // LIMIT 0,10 첫번째 페이지/LIMIT 10,10 두번째 페이지/LIMIT 20,10 세번째페이지
+//                        select * from board where writer = "희망찬" and created_at between date_add(now(), interval -1 day) and now();
+
+
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1, (pagination.getPage() - 1) * pagination.getMaxRecordsPerPage()); // 페이지-1 곱하기 10해야 첫번째 0,10,20 ... 숫자나옴
+            ps.setInt(2, pagination.getMaxRecordsPerPage());
+            rs = ps.executeQuery();
+
+            while(rs.next()){
+                Long id = rs.getLong("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String writer = rs.getString("writer");
+                LocalDateTime createAt = rs.getTimestamp("created_at").toLocalDateTime();
+                int viewCount = rs.getInt("view_count");
+                int commentCount = rs.getInt("view_count");
+
+                boards.add(new Board(id,title,content,writer,createAt,viewCount,commentCount));
+            }
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return boards;
+    }
+    public int countsearch(String value, String search) {
+        //search 가 널, 기간도 기본선택이면 null
+        //
+        if (search == null) {
+            return count();
+        } else {
+            Connection connection = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+
+            int count = 0;
+
+            try {
+                connection = connectDB();
+                String sql = "SELECT count(*) FROM board WHERE " + value + " LIKE " + "'%" + search + "%'";
+                ps = connection.prepareStatement(sql);
+                rs = ps.executeQuery();
+                //전체 카운트 조회의 커서 위치
+                rs.next();
+                //전체 카운트 값 담기
+                count = rs.getInt("count(*)");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    rs.close();
+                    ps.close();
+                    connection.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return count;
+        }
+    }
+
+
+    public int countsearch(String value, String search, String period) {
+        //search 가 널, 기간도 기본선택이면 null
+        //serach가 null이라면 전체 조회
+        if (search.equals("")) {
+            return count();
+        }else {
+            Connection connection = null;
+            PreparedStatement ps = null;
+            ResultSet rs = null;
+
+            int count = 0;
+
+            try {
+                connection = connectDB();
+                String sql = "SELECT count(*) FROM board WHERE "+ value +" LIKE "+ "'%" + search +"%'" + " AND created_at BETWEEN date_sub(now(), interval " + period + " day) and now()";
+//                            SELECT * FROM board WHERE "+ value +" LIKE "+ "'%" + search +"%'" + " AND created_at BETWEEN date_sub(now(), interval " + period + " day) and now() "
+                ps = connection.prepareStatement(sql);
+                rs = ps.executeQuery();
+                //전체 카운트 조회의 커서 위치
+                rs.next();
+                //전체 카운트 값 담기
+                count = rs.getInt("count(*)");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    rs.close();
+                    ps.close();
+                    connection.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return count;
+        }
+    }
 }
+
+

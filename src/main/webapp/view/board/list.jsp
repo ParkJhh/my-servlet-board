@@ -5,13 +5,37 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
+<%
+  Pagination pagination = (Pagination) request.getAttribute("pagination");
+  String value = (String) request.getAttribute("value");
+  String search = (String) request.getAttribute("search");
+  String period = (String) request.getAttribute("period");
+
+  String params = "";
+  if (search != null) {
+    params += "&value=" + value + "&search=" + search;
+  } else {
+    search = "";
+  }
+
+  if (period != null){
+    params += "&period=" + period;
+  } else {
+    period = "";
+  }
+
+%>
 
 <jsp:include page="/view/common/head.jsp">
   <jsp:param name="title" value="게시글 목록" />
 </jsp:include>
 
 <body>
-<jsp:include page="/view/common/header.jsp"/>
+<jsp:include page="/view/common/header.jsp">
+  <jsp:param name="value" value="<%=value%>"/>
+  <jsp:param name="search" value="<%=search%>"/>
+  <jsp:param name="period" value="<%=period%>"/>
+</jsp:include>
 
   <div>
     <h2 style="text-align: center; margin-top: 100px;"><b>게시글 목록</b></h2>
@@ -36,7 +60,7 @@
             <th scope="row"><%= boards.get(i).getId() %></th>
             <td><a href="/board/detail?id=<%= boards.get(i).getId() %>"><%= boards.get(i).getTitle() %></a></td>
             <td><%= boards.get(i).getWriter() %></td>
-            <td><%= boards.get(i).getCreatedAt().format(DateTimeFormatter.ofPattern("YYYY-MM-DD:HH")) %></td>
+            <td><%= boards.get(i).getCreatedAt().format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss")) %></td>
             <td><%= boards.get(i).getViewCount() %></td>
             <td><%= boards.get(i).getCommentCount() %></td>
           </tr>
@@ -53,39 +77,37 @@
       <nav aria-label="Page navigation example">
         <ul class="pagination pagination-sm">
           <%
-            Pagination pagination = (Pagination) request.getAttribute("pagination");
+
             if(pagination.isHasPrev()){
           %>
           <li class="page-item">
-            <a class="page-link" href="/board/list?page=<%=pagination.getStartPageOnScreen() - 1%>" tabindex="-1" aria-disabled="true">Previous</a>
+            <a class="page-link" href="/board/list?page=<%=pagination.getStartPageOnScreen()-1%><%=params%>" tabindex="-1" aria-disabled="true">Previous</a>
           </li>
           <%} else {%>
           <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            <a class="page-link" href="/board/list?page=<%=pagination.getStartPageOnScreen()-1%><%=params%>" tabindex="-1" aria-disabled="true">Previous</a>
           </li>
-          <%}%>
+          <%} %>
 
-          <% for(int i = pagination.getStartPageOnScreen(); i <= pagination.getEndPageOnScreen(); i++){
-             if(pagination.getPage() == i) {
+          <% for (int i = pagination.getStartPageOnScreen(); i <= pagination.getEndPageOnScreen(); i++) {
+            if(pagination.getPage() == i ) {
           %>
-            <li class="page-item"><a class="page-link active" href="/board/list?page=<%=i%>"><%=i%></a></li>
+          <li class="page-item"><a class="page-link active" href="/board/list?page=<%=i%><%=params%>"><%=i%></a></li>
           <%} else {%>
-            <li class="page-item"><a class="page-link" href="/board/list?page=<%=i%>"><%=i%></a></li>
+          <li class="page-item"><a class="page-link " href="/board/list?page=<%=i%><%=params%>"><%=i%></a></li>
           <%}}%>
 
           <%
-            if(pagination.isHasNext()){
+            if (pagination.isHasNext()) {
           %>
           <li class="page-item">
-            <a class="page-link" href="/board/list?page=<%=pagination.getEndPageOnScreen() +1%>">Next</a>
+            <a class="page-link" href="/board/list?page=<%=pagination.getEndPageOnScreen()+1%><%=params%>">Next</a>
           </li>
           <%} else {%>
-          <li class="page-item disabled">
-            <a class="page-link" href="#">Next</a>
+          <li class="page-item disabled" >
+            <a class="page-link" href="/board/list?page=<%=pagination.getEndPageOnScreen()+1%><%=params%>">Next</a>
           </li>
           <%}%>
-
-
         </ul>
       </nav>
     </div>
@@ -104,5 +126,4 @@
 </body>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
   integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-
 </html>

@@ -21,14 +21,23 @@ public class Pagination {
         //전체 페이지 = 전체레코드/한 페이지당 전체 레코드수
         //ex) 전체레코드 100 / 10 이라면, 전체 페이지는 10이다
         int totalPages = (int)(Math.ceil((double) this.totalRecords / maxRecordsPerPage));
-        //
+        //시작 페이지는 지금 페이지 / 한 페이지의 맥스 수 - 1 * 5 +1
+        //ex) 내 페이지가 1이라면,
+        // 첫째로 (1/5) => 0.몇 올림해서 1.
+        // 둘째로 1 - 1 = 0
+        // 셋째로 0 * 5 = 0
+        // 넷째로 0에 +1 해서 1
         this.startPageOnScreen =
                 (int)((Math.ceil((double) this.page/this.maxPageOnScreen) -1 ) * this.maxPageOnScreen + 1);
-
+        //한 화면의 끝 페이지는 (1+5) -1 해서 5
         this.endPageOnScreen = this.startPageOnScreen + this.maxPageOnScreen - 1;
-
+        //만약 화면 끝 페이지가 전체 페이지보다 크다면, 화면에 표시되는 끝 페이지를 5개씩 표시하지 않고, 전체 페이지의 마지막 수로 표시
         if(this.endPageOnScreen > totalPages){
-            this.endPageOnScreen = totalPages;
+            if(totalPages ==0){
+                this.endPageOnScreen = 1;
+            } else {
+                this.endPageOnScreen = totalPages;
+            }
         }
         //마지막 페이지가 전체 페이지보다 작다면 더 가야할 페이지가 있으므로 다음 버튼 활성화
         if(this.endPageOnScreen < totalPages) {
