@@ -2,8 +2,8 @@ package com.kitri.myservletboard.service;
 
 import com.kitri.myservletboard.dao.BoardDao;
 import com.kitri.myservletboard.dao.BoardJdbcDao;
-import com.kitri.myservletboard.dao.BoardMemoryDao;
 import com.kitri.myservletboard.data.Board;
+import com.kitri.myservletboard.data.Pagination;
 
 import java.util.ArrayList;
 
@@ -27,6 +27,23 @@ public class BoardService {
     public ArrayList<Board> getBoards() {
         return boardDao.getAll();
     }
+    public ArrayList<Board> getBoards(Pagination pagination) {
+        pagination.setTotlaRow(((BoardJdbcDao)boardDao).count());
+        pagination.calcPagination();
+        return boardDao.getAll(pagination);
+    }
+    public ArrayList<Board> getBoards(String type, String search, Pagination pagination) {
+        pagination.setTotlaRow(((BoardJdbcDao)boardDao).count(type,search));
+        pagination.calcPagination();
+        return boardDao.getAll(type, search, pagination);
+    }
+
+    public ArrayList<Board> getBoards(String type, String search, String period, Pagination pagination) {
+        pagination.setTotlaRow(((BoardJdbcDao)boardDao).count(type,search,period));
+        pagination.calcPagination();
+        return boardDao.getAll(type, search, period,pagination);
+    }
+
     public void addBoard(Board board){
         boardDao.save(board);
     }
@@ -36,4 +53,6 @@ public class BoardService {
     public void deleteBoard(Board board){
         boardDao.delete(board);
     }
+
+
 }

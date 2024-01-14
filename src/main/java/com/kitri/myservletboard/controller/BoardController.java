@@ -1,5 +1,6 @@
 package com.kitri.myservletboard.controller;
 import com.kitri.myservletboard.data.Board;
+import com.kitri.myservletboard.data.Pagination;
 import com.kitri.myservletboard.service.BoardService;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -19,7 +20,6 @@ public class BoardController extends HttpServlet {
         resp.setContentType("text/html;charset=UTF-8");
         req.setCharacterEncoding("UTF-8");
         PrintWriter out = resp.getWriter();
-        out.println("<h1>요청 테스트</h1>");
 
         //URL을 파싱해서 어떤 요청인지 파악
         out.println(req.getRequestURI());
@@ -29,9 +29,29 @@ public class BoardController extends HttpServlet {
         String view = "/view/board/";
 
         if (command.equals("/board/list")) {
-            //게시글 리스트 조회
-            ArrayList<Board> boards = boardService.getBoards();
-            req.setAttribute("boards",boards);
+            String page = req.getParameter("page");
+            String type = req.getParameter("type");
+            String search = req.getParameter("search");
+            String period = req.getParameter("period");
+
+            if(page == null) page = "1";
+            Pagination pagination = new Pagination(Integer.parseInt(page));
+            if(period == null){
+                ArrayList<Board> boards = boardService.getBoards(type, search, pagination);
+                req.setAttribute("boards",boards);
+            } else if (period.equals("")) {
+                ArrayList<Board> boards = boardService.getBoards(type, search, pagination);
+                req.setAttribute("boards",boards);
+            } else {
+                ArrayList<Board> boards = boardService.getBoards(type, search, period, pagination);
+                req.setAttribute("boards",boards);
+            }
+
+            req.setAttribute("pagination",pagination);
+            req.setAttribute("type", type);
+            req.setAttribute("search", search);
+            req.setAttribute("period", period);
+
             view += "list.jsp";
         } else if (command.equals("/board/createForm")) {
             view += "createForm.jsp";

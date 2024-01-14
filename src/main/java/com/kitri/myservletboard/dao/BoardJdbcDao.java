@@ -1,6 +1,7 @@
 package com.kitri.myservletboard.dao;
 
 import com.kitri.myservletboard.data.Board;
+import com.kitri.myservletboard.data.Pagination;
 
 import javax.swing.text.TableView;
 import java.sql.*;
@@ -59,7 +60,142 @@ public class BoardJdbcDao implements BoardDao{
                 boards.add(new Board(id,title,content,writer,createAt,viewCount,commentCount));
             }
         } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return boards;
+    }
 
+    @Override
+    public ArrayList<Board> getAll(Pagination pagination) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Board> boards = new ArrayList<>();
+
+        try{
+            connection = connectDB();
+            String sql = "SELECT * FROM board LIMIT ?,?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1,(pagination.getPage() -1) * pagination.getRowPerPage());
+            ps.setInt(2,pagination.getRowPerPage());
+            rs = ps.executeQuery();
+
+            while(rs.next()){
+                Long id = rs.getLong("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String writer = rs.getString("writer");
+                LocalDateTime createAt = rs.getTimestamp("created_at").toLocalDateTime();
+                int viewCount = rs.getInt("view_count");
+                int commentCount = rs.getInt("view_count");
+
+                boards.add(new Board(id,title,content,writer,createAt,viewCount,commentCount));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return boards;
+    }
+
+    @Override
+    public ArrayList<Board> getAll(String type, String search, Pagination pagination) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Board> boards = new ArrayList<>();
+        if (type == null){
+            type="title";
+        }
+        if (search == null) {
+            search="";
+        }
+
+        try{
+            connection = connectDB();
+            String sql = "SELECT * FROM board where " + type + " like " + "'%" + search + "%'" + " LIMIT ?,?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1,(pagination.getPage() -1) * pagination.getRowPerPage());
+            ps.setInt(2,pagination.getRowPerPage());
+            rs = ps.executeQuery();
+
+            while(rs.next()){
+                Long id = rs.getLong("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String writer = rs.getString("writer");
+                LocalDateTime createAt = rs.getTimestamp("created_at").toLocalDateTime();
+                int viewCount = rs.getInt("view_count");
+                int commentCount = rs.getInt("view_count");
+
+                boards.add(new Board(id,title,content,writer,createAt,viewCount,commentCount));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return boards;
+    }
+
+    @Override
+    public ArrayList<Board> getAll(String type, String search, String period, Pagination pagination) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        ArrayList<Board> boards = new ArrayList<>();
+        if (type == null){
+            type="title";
+        }
+        if (search == null) {
+            search="";
+        }
+
+        try{
+            connection = connectDB();
+            String sql = "SELECT * FROM board where " + type + " like " + "'%" + search + "%'" + " and created_at between date_sub(now(), interval " + period + " day) and now() " + " limit ?,?";
+            ps = connection.prepareStatement(sql);
+            ps.setInt(1,(pagination.getPage() -1) * pagination.getRowPerPage());
+            ps.setInt(2,pagination.getLinePerPage());
+            rs = ps.executeQuery();
+
+            while(rs.next()){
+                Long id = rs.getLong("id");
+                String title = rs.getString("title");
+                String content = rs.getString("content");
+                String writer = rs.getString("writer");
+                LocalDateTime createAt = rs.getTimestamp("created_at").toLocalDateTime();
+                int viewCount = rs.getInt("view_count");
+                int commentCount = rs.getInt("view_count");
+
+                boards.add(new Board(id,title,content,writer,createAt,viewCount,commentCount));
+            }
+        } catch(Exception e) {
+            e.printStackTrace();
         } finally {
             try {
                 rs.close();
@@ -185,6 +321,105 @@ public class BoardJdbcDao implements BoardDao{
             } catch(Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    public int count(){
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        int count = 0;
+        try{
+            connection = connectDB();
+            String sql = "SELECT COUNT(*) FROM board";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            rs.next();
+
+            count = rs.getInt("count(*)");
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return count;
+    }
+    public int count(String type, String search){
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        int count = 0;
+
+        if (type == null){
+            type="title";
+        }
+        if (search == null) {
+            search="";
+        }
+
+        try{
+            connection = connectDB();
+            String sql = "SELECT COUNT(*) FROM board where " + type + " like " + "'%" + search + "%'";
+            ps = connection.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            rs.next();
+            count = rs.getInt("count(*)");
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                rs.close();
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return count;
+    }
+    public int count(String type, String search, String period) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        if (search == null) {
+            return count();
+        } else {
+            int count = 0;
+
+            try {
+                connection = connectDB();
+                String sql = "SELECT COUNT(*) FROM board where " + type + " like " + "'%" + search + "%'" + " and created_at between date_sub(now(), interval " + period + " day) and now() ";
+                ps = connection.prepareStatement(sql);
+                rs = ps.executeQuery();
+
+                rs.next();
+                count = rs.getInt("count(*)");
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                try {
+                    rs.close();
+                    ps.close();
+                    connection.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            return count;
         }
     }
 }
