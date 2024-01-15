@@ -27,6 +27,13 @@ public class BoardService {
     public ArrayList<Board> getBoards() {
         return boardDao.getAll();
     }
+
+    public ArrayList<Board> getBoardsOrderBy(String value, String search, String period, String orderBy, Pagination pagination) {
+        pagination.setTotalRecords(((BoardJdbcDao)boardDao).countsearch(value, search, period)); //테이블 전체 레코드 수
+        pagination.calcPagination();
+
+        return boardDao.getAll(value,search,period,orderBy,pagination);
+    }
     public ArrayList<Board> getBoards(String value, String search, String period, Pagination pagination) {
         pagination.setTotalRecords(((BoardJdbcDao)boardDao).countsearch(value, search, period)); //테이블 전체 레코드 수
         pagination.calcPagination();

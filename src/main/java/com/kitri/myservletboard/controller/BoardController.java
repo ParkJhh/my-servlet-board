@@ -35,25 +35,37 @@ public class BoardController extends HttpServlet {
             //검색 값
             String value = req.getParameter("value");
             String search = req.getParameter("search");
-            //검색 기간조화
+            //검색 기간조회 초기 null, 전체조회 ""
             String period = req.getParameter("period");
+            //최신순, 조회순, 몇개씩 볼것인가
+            String orderBy = req.getParameter("orderBy");
+            String maxRecordsPerPage = req.getParameter("maxRecordsPerPage");
 
             if (page == null) page = "1";
-            Pagination pagination = new Pagination(Integer.parseInt(page));
+            if (period == null) period = "36500";
+            if (value == null) value = "title";
+            if (search == null) search = "";
+            if (maxRecordsPerPage == null) maxRecordsPerPage = "10";
+
+            Pagination pagination = new Pagination(Integer.parseInt(page), Integer.parseInt(maxRecordsPerPage));
+
             if (period == null) {
                 ArrayList<Board> boards = boardService.getBoards(value, search, pagination);
                 req.setAttribute("boards", boards);
-            } else if (period.equals("")) {
-                ArrayList<Board> boards = boardService.getBoards(value, search, pagination);
+            } else if(orderBy != null && period != null) {
+                ArrayList<Board> boards = boardService.getBoardsOrderBy(value, search, period, orderBy,pagination);
                 req.setAttribute("boards", boards);
-            } else {
-                ArrayList<Board> boards = boardService.getBoards(value,search,period,pagination);
+            } else if (period.equals("36500")) {
+                ArrayList<Board> boards = boardService.getBoards(value, search, period, pagination);
                 req.setAttribute("boards", boards);
             }
+
             req.setAttribute("pagination",pagination);
             req.setAttribute("value",value);
             req.setAttribute("search",search);
             req.setAttribute("period",period);
+            req.setAttribute("orderBy",orderBy);
+            req.setAttribute("maxRecordsPerPage",maxRecordsPerPage);
             view += "list.jsp";
 
         } else if (command.equals("/board/createForm")) {

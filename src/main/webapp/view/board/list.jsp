@@ -10,6 +10,8 @@
   String value = (String) request.getAttribute("value");
   String search = (String) request.getAttribute("search");
   String period = (String) request.getAttribute("period");
+  String orderBy = (String) request.getAttribute("orderBy");
+  String maxRecordsPerPage = (String) request.getAttribute("maxRecordsPerPage");
 
   String params = "";
   if (search != null) {
@@ -24,6 +26,12 @@
     period = "";
   }
 
+  if (orderBy != null){
+    params += "&orderBy=" + orderBy + "&maxRecordsPerPage=" + maxRecordsPerPage;
+  } else {
+    orderBy = "";
+  }
+
 %>
 
 <jsp:include page="/view/common/head.jsp">
@@ -35,11 +43,14 @@
   <jsp:param name="value" value="<%=value%>"/>
   <jsp:param name="search" value="<%=search%>"/>
   <jsp:param name="period" value="<%=period%>"/>
+  <jsp:param name="orderBy" value="<%=orderBy%>"/>
+  <jsp:param name="maxRecordsPerPage" value="<%=maxRecordsPerPage%>"/>
 </jsp:include>
 
-  <div>
-    <h2 style="text-align: center; margin-top: 100px;"><b>게시글 목록</b></h2>
+  <div class="d-flex pt-5 mt-5">
+    <h2 class="pl-5 flex-grow-1" style="text-align: center;"><b>게시글 목록</b></h2>
   </div>
+
   <div class="container class=d-flex justify-content-center">
     <div class="p-2 border-primary mb-3">
       <table class="table align-middle table-hover">

@@ -4,7 +4,7 @@ import com.kitri.myservletboard.dao.BoardJdbcDao;
 
 public class Pagination {
     private int page;
-    private int maxRecordsPerPage = 10;
+    private int maxRecordsPerPage;
     private int maxPageOnScreen = 5;
     private int startIndex = 0;
     private int totalRecords = 0;
@@ -51,8 +51,13 @@ public class Pagination {
 
     public Pagination(){};
 
-    public Pagination(int page) {
+    public Pagination(int page){
         this.page = page;
+    }
+
+    public Pagination(int page,int maxRecordsPerPage) {
+        this.page = page;
+        this.maxRecordsPerPage = maxRecordsPerPage;
     }
     public int getPage() {
         return page;

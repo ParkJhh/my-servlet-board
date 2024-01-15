@@ -10,14 +10,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a94a5c00-d8ea-4d4c-9aaf-8c70d5727bc6" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardJdbcDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardJdbcDao.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/data/Pagination.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/data/Pagination.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/service/BoardService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/view/board/list.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/board/list.jsp" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/webapp/view/common/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/common/header.jsp" afterDir="false" />
     </list>
