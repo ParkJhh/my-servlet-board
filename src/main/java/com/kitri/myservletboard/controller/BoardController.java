@@ -1,13 +1,17 @@
 package com.kitri.myservletboard.controller;
 import com.kitri.myservletboard.data.Board;
+import com.kitri.myservletboard.data.Member;
 import com.kitri.myservletboard.data.Pagination;
 import com.kitri.myservletboard.service.BoardService;
+import com.kitri.myservletboard.service.MemberService;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
@@ -15,6 +19,7 @@ import java.util.ArrayList;
 @WebServlet("/board/*")
 public class BoardController extends HttpServlet {
     BoardService boardService = BoardService.getInstance();
+    MemberService memberService = MemberService.getInstance();
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -56,6 +61,7 @@ public class BoardController extends HttpServlet {
                 ArrayList<Board> boards = boardService.getBoardsOrderBy(value, search, period, orderBy,pagination);
                 req.setAttribute("boards", boards);
             } else if (period.equals("36500")) {
+                //전체조회
                 ArrayList<Board> boards = boardService.getBoards(value, search, period, pagination);
                 req.setAttribute("boards", boards);
             }
@@ -112,7 +118,9 @@ public class BoardController extends HttpServlet {
         } else if (command.contains("/board/detail")) {
             Long id = Long.parseLong(req.getParameter("id"));
             Board board = boardService.getBoard(id);
+
             req.setAttribute("board",board);
+
             view += "detail.jsp";
 
         }

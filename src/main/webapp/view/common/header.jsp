@@ -1,4 +1,4 @@
-<%--
+<%@ page import="com.kitri.myservletboard.data.Member" %><%--
   Created by IntelliJ IDEA.
   User: kitri
   Date: 2024-01-09
@@ -29,7 +29,14 @@ run_circle
             <div class="p-2"><a href="/board/list">게시글 목록</a></div>
             <div class="p-2"><a href="/view/member/join.jsp">회원 가입</a></div>
             <div class="p-2"><a href="/view/member/registration.jsp">회원정보 수정</a></div>
+            <%
+                Member member = (Member) session.getAttribute("member");
+                //아이디가 존재한다면
+                if(member != null) {%>
+            <div class="p-2"><a href="/member/logout">로그아웃</a></div>
+            <%} else {%>
             <div class="p-2"><a href="/view/member/login.jsp">로그인</a></div>
+            <%}%>
             <div class="p-2">
                 <form role="search" action="/board/list">
                     <select name="period" >
