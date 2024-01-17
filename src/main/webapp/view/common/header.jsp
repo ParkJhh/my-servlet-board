@@ -7,6 +7,10 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
+<%
+    Member member = (Member) session.getAttribute("member");
+%>
+
 <style>
     .material-symbols-outlined {
         font-variation-settings:
@@ -26,16 +30,21 @@ run_circle
 </span></a>
         <nav>
         <div class="d-flex justify-content-center">
-            <div class="p-2"><a href="/board/list">게시글 목록</a></div>
-            <div class="p-2"><a href="/view/member/join.jsp">회원 가입</a></div>
-            <div class="p-2"><a href="/view/member/registration.jsp">회원정보 수정</a></div>
+            <div class="p-2"><a class="headerAtag" href="/board/list">게시글 목록</a></div>
             <%
-                Member member = (Member) session.getAttribute("member");
                 //아이디가 존재한다면
                 if(member != null) {%>
-            <div class="p-2"><a href="/member/logout">로그아웃</a></div>
+            <div class="p-2"><a><%=member.getLoginId()%>님 환영합니다.</a></div>
             <%} else {%>
-            <div class="p-2"><a href="/view/member/login.jsp">로그인</a></div>
+            <div class="p-2"><a class="headerAtag" href="/view/member/join.jsp" >회원 가입</a></div>
+            <%}%>
+            <div class="p-2"><a class="headerAtag" href="/view/member/registration.jsp">회원정보 수정</a></div>
+            <%
+                //아이디가 존재한다면
+                if(member != null) {%>
+            <div class="p-2"><a class="headerAtag" href="/member/logout">로그아웃</a></div>
+            <%} else {%>
+            <div class="p-2"><a class="headerAtag" href="/view/member/login.jsp">로그인</a></div>
             <%}%>
             <div class="p-2">
                 <form role="search" action="/board/list">

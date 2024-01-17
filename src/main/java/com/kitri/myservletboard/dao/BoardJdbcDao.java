@@ -210,11 +210,12 @@ public class BoardJdbcDao implements BoardDao{
 
         try{
             connection = connectDB();
-            String sql = "INSERT INTO board (title,content,writer) VALUES(?,?,?)";
+            String sql = "INSERT INTO board (title,content,writer,member_id) VALUES(?,?,?,?)";
             ps = connection.prepareStatement(sql);
             ps.setString(1,board.getTitle());
             ps.setString(2,board.getContent());
             ps.setString(3,board.getWriter());
+            ps.setLong(4,board.getMemberId());
             ps.executeUpdate();
 
         } catch(Exception e) {

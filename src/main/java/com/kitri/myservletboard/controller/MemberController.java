@@ -56,9 +56,16 @@ public class MemberController extends HttpServlet {
             }
 
         } else if(command.equals("/member/regi")) {
+            String username = req.getParameter("username");
+            String userid = req.getParameter("userid");
+            String pw = req.getParameter("pw");
+            String email = req.getParameter("email");
 
-            
+            Member member = new Member(userid, pw, username, email);
+            memberService.updateMember(member);
 
+            resp.sendRedirect("/view/member/regiOk.jsp");
+            return;
         } else if (command.equals("/member/login")) {
             String userid = req.getParameter("userid");
             String pw = req.getParameter("pw");

@@ -98,4 +98,32 @@ public class MemberJdbcDao implements MemberDao{
             }
         }
     }
+
+    @Override
+    public void updateMember(Member member) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+
+        try{
+            connection = connectDB();
+            String sql = "UPDATE member set password=?,name=?,email=? where login_id=?";
+            ps = connection.prepareStatement(sql);
+
+            ps.setString(1, member.getPassword());
+            ps.setString(2,member.getName());
+            ps.setString(3, member.getEmail());
+            ps.setString(4, member.getLoginId());
+            ps.executeUpdate();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

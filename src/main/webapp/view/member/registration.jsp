@@ -33,8 +33,8 @@
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
-                            <label for="userid">아이디</label>
-                            <input type="text" class="form-control" name="userid" id="userid"  value="<%=member.getLoginId()%>" disabled>
+                            <label for="userid">아이디(수정 할 수 없는 항목입니다.)</label>
+                            <input type="text" class="form-control" name="userid" id="userid"  value="<%=member.getLoginId()%>" readonly>
                         </div>
                     </div>
                     <div class="row">

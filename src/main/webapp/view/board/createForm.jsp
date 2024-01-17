@@ -1,6 +1,11 @@
+<%@ page import="com.kitri.myservletboard.data.Member" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="ko">
+
+<%
+  Member member = (Member) session.getAttribute("member");
+%>
 
 <jsp:include page="/view/common/head.jsp">
   <jsp:param name="title" value="게시글 등록" />
@@ -15,7 +20,7 @@
         <h4 class="mb-3"><b>게시글 등록</b></h4>
         <hr>
         <br>
-        <form class="validation-form" novalidate action="/board/create" method="post">
+        <form class="validation-form" action="/board/create" method="post">
           <div class="mb-3">
             <label for="title">제목</label>
             <input name="title" type="text" class="form-control" id="title" placeholder="제목을 입력해주세요" required>
@@ -27,19 +32,10 @@
           <div class="row">
             <div class="col-md-6 mb-3">
               <label for="writer">작성자</label>
-              <input name="writer" type="text" class="form-control" id="writer" placeholder="" value="" required>
-              <div class="invalid-feedback">
-                작성자를 입력해주세요.
-              </div>
+              <input name="writer" type="text" class="form-control" id="writer" value="<%=member.getName()%>" readonly>
             </div>
-<%--            <div class="col-md-6 mb-3">--%>
-<%--              <label for="name">비밀번호</label>--%>
-<%--              <input type="password" class="form-control" id="password" placeholder="비밀번호를 입력해주세요" value="" required>--%>
-<%--              <div class="invalid-feedback">--%>
-<%--                비밀번호를 입력해주세요.--%>
-<%--              </div>--%>
-<%--            </div>--%>
           </div>
+          <input type="text" name="memberId" id="memberId" value="<%=member.getId()%>" hidden>
           <div class="mb-3">
             <label for="content" class="form-label">내용</label>
             <textarea name="content" id = "content" class="form-control" cols="30" rows="5" placeholder="내용을 입력해주세요"></textarea>
@@ -53,8 +49,8 @@
               <button class="btn btn-secondary btn-block" type="submit">취소</button>
             </div>
           </div>
+        </form>
       </div>
-      </form>
     </div>
   </div>
   <div class="p-2">
