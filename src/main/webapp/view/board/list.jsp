@@ -2,6 +2,7 @@
 <%@ page import="com.kitri.myservletboard.data.Board" %>
 <%@ page import="com.kitri.myservletboard.data.Pagination" %>
 <%@ page import="java.time.format.DateTimeFormatter" %>
+<%@ page import="com.kitri.myservletboard.data.Member" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -81,9 +82,14 @@
           <input type="text" name="currentPage" value="1" hidden>
         </tbody>
       </table>
+      <%
+        Member member = (Member) session.getAttribute("member");
+        //아이디가 존재한다면
+        if(member != null) {%>
       <div>
         <a href="/board/createForm" role="button" class="btn btn-outline-dark">글쓰기</a>
       </div>
+      <%}%>
       <div class="d-flex justify-content-center">
       <nav aria-label="Page navigation example">
         <ul class="pagination pagination-sm">

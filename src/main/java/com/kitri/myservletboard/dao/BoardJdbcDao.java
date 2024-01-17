@@ -184,8 +184,9 @@ public class BoardJdbcDao implements BoardDao{
                 LocalDateTime createAt = rs.getTimestamp("created_at").toLocalDateTime();
                 int viewCount = rs.getInt("view_count");
                 int commentCount = rs.getInt("view_count");
+                Long memberId = rs.getLong("member_id");
 
-                Board board_ =new Board(id,title,content,writer,createAt,viewCount,commentCount);
+                Board board_ =new Board(id,title,content,writer,createAt,viewCount,commentCount,memberId);
                 return board_;
             }
         } catch(Exception e) {
