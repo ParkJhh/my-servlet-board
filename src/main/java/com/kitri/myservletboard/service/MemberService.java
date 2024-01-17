@@ -19,6 +19,9 @@ public class MemberService {
     public void addMemeber(Member member){
         MemberDao.saveMember(member);
     }
+    public void updateMember(Member member){
+        MemberDao.updateMember(member);
+    }
 
     public Member getMember(String userid) {
         return  MemberDao.getMember(userid);

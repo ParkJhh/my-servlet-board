@@ -20,6 +20,7 @@ import java.util.ArrayList;
 public class BoardController extends HttpServlet {
     BoardService boardService = BoardService.getInstance();
     MemberService memberService = MemberService.getInstance();
+
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html;charset=UTF-8");
@@ -29,7 +30,7 @@ public class BoardController extends HttpServlet {
 
         //URL을 파싱해서 어떤 요청인지 파악
         out.println(req.getRequestURI());
-        String reqURI = req.getRequestURI(); //   /board/list
+        String reqURI = req.getRequestURI();
         String contextPath = req.getContextPath();
         String command = reqURI.substring(contextPath.length());
         String view = "/view/board/";
@@ -50,6 +51,7 @@ public class BoardController extends HttpServlet {
             if (period == null) period = "36500";
             if (value == null) value = "title";
             if (search == null) search = "";
+            if (orderBy == null) orderBy = "createdAtDESC";
             if (maxRecordsPerPage == null) maxRecordsPerPage = "10";
 
             Pagination pagination = new Pagination(Integer.parseInt(page), Integer.parseInt(maxRecordsPerPage));
@@ -62,7 +64,7 @@ public class BoardController extends HttpServlet {
                 req.setAttribute("boards", boards);
             } else if (period.equals("36500")) {
                 //전체조회
-                ArrayList<Board> boards = boardService.getBoards(value, search, period, pagination);
+                ArrayList<Board> boards = boardService.getBoardsOrderBy(value, search, period, orderBy,pagination);
                 req.setAttribute("boards", boards);
             }
 
@@ -81,7 +83,8 @@ public class BoardController extends HttpServlet {
             String title = req.getParameter("title");
             String content = req.getParameter("content");
             String writer = req.getParameter("writer");
-            Board board = new Board(null, title, content, writer, LocalDateTime.now(), 0,0);
+            Long memberId = Long.parseLong(req.getParameter("memberId"));
+            Board board = new Board(null, title, content, writer, LocalDateTime.now(), 0,0,memberId);
             boardService.addBoard(board);
             resp.sendRedirect("/board/list");
             return;
