@@ -34,7 +34,7 @@ run_circle
             <%
                 //아이디가 존재한다면
                 if(member != null) {%>
-            <div class="p-2"><a><%=member.getLoginId()%>님 환영합니다.</a></div>
+            <div class="p-2"><a><%=member.getName()%>님 환영합니다.</a></div>
             <%} else {%>
             <div class="p-2"><a class="headerAtag" href="/view/member/join.jsp" >회원 가입</a></div>
             <%}%>

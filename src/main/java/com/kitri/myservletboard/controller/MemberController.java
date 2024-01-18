@@ -84,7 +84,6 @@ public class MemberController extends HttpServlet {
                     isLoginFailed = true;
                 }
             }
-
             if(isLoginFailed) {
                 req.setAttribute("loginFailed",isLoginFailed);
                 view += "loginFail.jsp";
