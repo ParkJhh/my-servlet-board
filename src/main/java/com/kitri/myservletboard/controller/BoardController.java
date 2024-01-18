@@ -1,8 +1,10 @@
 package com.kitri.myservletboard.controller;
+import com.kitri.myservletboard.data.Acomment;
 import com.kitri.myservletboard.data.Board;
 import com.kitri.myservletboard.data.Member;
 import com.kitri.myservletboard.data.Pagination;
 import com.kitri.myservletboard.service.BoardService;
+import com.kitri.myservletboard.service.CommentService;
 import com.kitri.myservletboard.service.MemberService;
 
 import javax.servlet.RequestDispatcher;
@@ -20,6 +22,7 @@ import java.util.ArrayList;
 public class BoardController extends HttpServlet {
     BoardService boardService = BoardService.getInstance();
     MemberService memberService = MemberService.getInstance();
+    CommentService commentService = CommentService.getInstance();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -84,6 +87,7 @@ public class BoardController extends HttpServlet {
             String content = req.getParameter("content");
             String writer = req.getParameter("writer");
             Long memberId = Long.parseLong(req.getParameter("memberId"));
+
             Board board = new Board(null, title, content, writer, LocalDateTime.now(), 0,0,memberId);
             boardService.addBoard(board);
             resp.sendRedirect("/board/list");
@@ -121,6 +125,10 @@ public class BoardController extends HttpServlet {
         } else if (command.contains("/board/detail")) {
             Long id = Long.parseLong(req.getParameter("id"));
             Board board = boardService.getBoard(id);
+
+            //전체 댓글 불러오기
+            ArrayList<Acomment> comments = commentService.getComment(id);
+            req.setAttribute("comments",comments);
 
             req.setAttribute("board",board);
 
