@@ -124,14 +124,15 @@ public class BoardController extends HttpServlet {
 
         } else if (command.contains("/board/detail")) {
             Long id = Long.parseLong(req.getParameter("id"));
+            //게시글 불러오기
             Board board = boardService.getBoard(id);
-
             //전체 댓글 불러오기
             ArrayList<Acomment> comments = commentService.getComment(id);
+            //조회수 증가
+            boardService.viewCountUp(id);
+
             req.setAttribute("comments",comments);
-
             req.setAttribute("board",board);
-
             view += "detail.jsp";
 
         }

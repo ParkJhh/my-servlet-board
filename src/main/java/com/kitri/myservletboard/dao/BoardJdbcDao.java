@@ -279,6 +279,32 @@ public class BoardJdbcDao implements BoardDao{
             }
         }
     }
+
+    @Override
+    public void viewCountUp(Long id) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+
+        try{
+            connection = connectDB();
+            String sql = "UPDATE board set view_count = view_count + 1 where id=?";
+//            UPDATE board set view_count = view_count + 1 where id=125;
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1,id);
+            ps.executeUpdate();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
     public int count(){
         Connection connection = null;
         PreparedStatement ps = null;

@@ -20,4 +20,5 @@ public interface BoardDao {
     public void update(Board board);
 
     public void delete(Board board);
+    public void viewCountUp(Long id);
 }

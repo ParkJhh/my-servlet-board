@@ -63,4 +63,7 @@ public class BoardService {
     public void deleteBoard(Board board){
         boardDao.delete(board);
     }
+    public void viewCountUp(Long id){
+        boardDao.viewCountUp(id);
+    }
 }
