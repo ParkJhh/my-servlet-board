@@ -183,7 +183,7 @@ public class BoardJdbcDao implements BoardDao{
                 String writer = rs.getString("writer");
                 LocalDateTime createAt = rs.getTimestamp("created_at").toLocalDateTime();
                 int viewCount = rs.getInt("view_count");
-                int commentCount = rs.getInt("view_count");
+                int commentCount = rs.getInt("comment_count");
                 Long memberId = rs.getLong("member_id");
 
                 Board board_ =new Board(id,title,content,writer,createAt,viewCount,commentCount,memberId);
@@ -288,6 +288,56 @@ public class BoardJdbcDao implements BoardDao{
         try{
             connection = connectDB();
             String sql = "UPDATE board set view_count = view_count + 1 where id=?";
+//            UPDATE board set view_count = view_count + 1 where id=125;
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1,id);
+            ps.executeUpdate();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void commentCountUp(Long id) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+
+        try{
+            connection = connectDB();
+            String sql = "UPDATE board set comment_count = comment_count + 1 where id=?";
+//            UPDATE board set view_count = view_count + 1 where id=125;
+            ps = connection.prepareStatement(sql);
+            ps.setLong(1,id);
+            ps.executeUpdate();
+
+        } catch(Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                ps.close();
+                connection.close();
+            } catch(Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void commentCountDown(Long id) {
+        Connection connection = null;
+        PreparedStatement ps = null;
+
+        try{
+            connection = connectDB();
+            String sql = "UPDATE board set comment_count = comment_count - 1 where id=?";
 //            UPDATE board set view_count = view_count + 1 where id=125;
             ps = connection.prepareStatement(sql);
             ps.setLong(1,id);

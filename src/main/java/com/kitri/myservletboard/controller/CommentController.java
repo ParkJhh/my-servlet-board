@@ -3,6 +3,7 @@ package com.kitri.myservletboard.controller;
 import com.kitri.myservletboard.data.Acomment;
 import com.kitri.myservletboard.data.Board;
 import com.kitri.myservletboard.data.Member;
+import com.kitri.myservletboard.service.BoardService;
 import com.kitri.myservletboard.service.CommentService;
 
 import javax.servlet.RequestDispatcher;
@@ -20,6 +21,7 @@ import java.util.ArrayList;
 public class CommentController extends HttpServlet {
 
     CommentService commentService = CommentService.getInstance();
+    BoardService boardService = BoardService.getInstance();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -48,6 +50,8 @@ public class CommentController extends HttpServlet {
             Acomment comment = new Acomment(boardId,memberId,commentText);
             //댓글 추가
             commentService.addComment(comment);
+            //댓글 작성 이후 코멘트수를 보드DB에 반영
+            boardService.commentCountUp(boardId);
 
             resp.sendRedirect("/board/detail?id=" + boardId);
             return;
@@ -55,6 +59,9 @@ public class CommentController extends HttpServlet {
             Long commentId = Long.parseLong(req.getParameter("commentId"));
             Long boardId = Long.parseLong(req.getParameter("boardChk"));
 
+            //댓글 삭제 처리를 받으면 보드DB에서 댓글수를 -1 한다
+            boardService.commentCountDown(boardId);
+            //댓글 삭제
             commentService.deleteComment(commentId);
 
             resp.sendRedirect("/board/detail?id=" + boardId);

@@ -21,4 +21,6 @@ public interface BoardDao {
 
     public void delete(Board board);
     public void viewCountUp(Long id);
+    public void commentCountUp(Long id);
+    public void commentCountDown(Long id);
 }
