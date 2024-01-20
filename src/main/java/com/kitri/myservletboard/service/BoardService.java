@@ -66,4 +66,10 @@ public class BoardService {
     public void viewCountUp(Long id){
         boardDao.viewCountUp(id);
     }
+    public void commentCountUp(Long id){
+        boardDao.commentCountUp(id);
+    }
+    public void commentCountDown(Long id){
+        boardDao.commentCountDown(id);
+    }
 }
