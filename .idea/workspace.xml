@@ -12,7 +12,6 @@
     <list default="true" id="7f463a7f-6868-42ec-a2e8-a62883876631" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/common/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/common/header.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +192,8 @@
       <workItem from="1710830173123" duration="3359000" />
       <workItem from="1710849801628" duration="842000" />
       <workItem from="1711695326656" duration="642000" />
-      <workItem from="1711939588883" duration="881000" />
+      <workItem from="1711939588883" duration="999000" />
+      <workItem from="1711956025717" duration="66000" />
     </task>
     <servers />
   </component>
