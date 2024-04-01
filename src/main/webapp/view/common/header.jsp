@@ -25,9 +25,8 @@
 </head>
 <body>
     <header class="">
-        <a class="logo" href="/board/list"><span class="material-symbols-outlined">
-run_circle
-</span></a>
+        <a class="logo" href="/board/list"><span class="material-symbols-outlined">run_circle
+        </span></a>
         <nav>
         <div class="d-flex justify-content-center">
             <div class="p-2"><a class="headerAtag" href="/board/list">게시글 목록</a></div>

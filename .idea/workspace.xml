@@ -11,16 +11,16 @@
   <component name="ChangeListManager">
     <list default="true" id="7f463a7f-6868-42ec-a2e8-a62883876631" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/BoardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/CommentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/controller/CommentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardJdbcDao.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardJdbcDao.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/service/BoardService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/service/BoardService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/webapp/view/common/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/view/common/header.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -29,15 +29,32 @@
     <option name="FILTER_DEBUG" value="true" />
     <option name="CUSTOM_FILTER" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "git-widget-placeholder": "feautre/commentUp",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)"
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 5
+}</component>
+  <component name="ProjectId" id="2bFXCaHzlNVrMApK3SJHucGlwI0" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Tomcat 9.0.82" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 9.0.82" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
       <option name="UPDATING_POLICY" value="restart-server" />
@@ -127,24 +144,63 @@
       </method>
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7f463a7f-6868-42ec-a2e8-a62883876631" name="Changes" comment="" />
+      <created>1705811676437</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1705811676437</updated>
+      <workItem from="1705811677549" duration="2116000" />
+      <workItem from="1705820409827" duration="12000" />
+      <workItem from="1705821547627" duration="158000" />
+      <workItem from="1705823011628" duration="856000" />
+      <workItem from="1705837716992" duration="841000" />
+      <workItem from="1705845779843" duration="7000" />
+      <workItem from="1705881269350" duration="238000" />
+      <workItem from="1705913505214" duration="31000" />
+      <workItem from="1706070031358" duration="3281000" />
+      <workItem from="1706092481960" duration="625000" />
+      <workItem from="1706141962581" duration="1000" />
+      <workItem from="1706160343083" duration="130000" />
+      <workItem from="1707128902320" duration="52000" />
+      <workItem from="1707198475374" duration="12000" />
+      <workItem from="1707199597245" duration="758000" />
+      <workItem from="1707204760657" duration="1345000" />
+      <workItem from="1707266436425" duration="1277000" />
+      <workItem from="1707301180406" duration="662000" />
+      <workItem from="1707399708642" duration="2855000" />
+      <workItem from="1707569709688" duration="10000" />
+      <workItem from="1707653998305" duration="39000" />
+      <workItem from="1707654046194" duration="2817000" />
+      <workItem from="1707796427485" duration="1323000" />
+      <workItem from="1707815982140" duration="1206000" />
+      <workItem from="1707870623672" duration="748000" />
+      <workItem from="1707898581171" duration="883000" />
+      <workItem from="1707961021502" duration="424000" />
+      <workItem from="1707985690360" duration="38000" />
+      <workItem from="1708332221100" duration="806000" />
+      <workItem from="1708568242452" duration="16000" />
+      <workItem from="1708699268264" duration="650000" />
+      <workItem from="1708753972301" duration="9000" />
+      <workItem from="1708769556995" duration="17000" />
+      <workItem from="1708784757758" duration="742000" />
+      <workItem from="1708923177655" duration="400000" />
+      <workItem from="1708923690699" duration="1108000" />
+      <workItem from="1709535222663" duration="14000" />
+      <workItem from="1710825271707" duration="1142000" />
+      <workItem from="1710830173123" duration="3359000" />
+      <workItem from="1710849801628" duration="842000" />
+      <workItem from="1711695326656" duration="642000" />
+      <workItem from="1711939588883" duration="881000" />
+    </task>
     <servers />
   </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardJdbcDao.java</url>
-          <line>339</line>
-          <option name="timeStamp" value="23" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/com/kitri/myservletboard/dao/BoardJdbcDao.java</url>
-          <line>343</line>
-          <option name="timeStamp" value="24" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
     <pin-to-top-manager>
       <pinned-members>
         <PinnedItemInfo parentTag="org.apache.catalina.session.StandardSession" memberName="id" />
